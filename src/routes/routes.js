@@ -1,14 +1,17 @@
 import { Router } from "express";
 import {
-    deleteUsuario, editUsuarioId, getUsuario, loginUsuario, postRol, crearUsuario, getUsuariosId, getUsuarioById,
-    getAfiliadosPorUsuarioId, getUsuarioDatosId, FotoPerfil, upload, GetAfiliadorAfiliadores, verificarToken, crearUsuarioCode,
+    getUsuario, loginUsuario, postRol, crearUsuario, getUsuariosId,FotoPerfil, upload,verificarToken,
     refreshToken,me,logoutUsuario,
     Notificaciones,
-    CreateMensagge
+    CreateMensagge,
+    posMetodo,
+    postTelefono,
+    postFechaPago
 } from "../controller/UserController.js";
 
 const router = Router();
 
+router.post('/login', loginUsuario);
 // Crear un nuevo usuario
 router.post('/CreateUsuario', verificarToken, crearUsuario);
 
@@ -16,34 +19,22 @@ router.post('/CreateUsuario', verificarToken, crearUsuario);
 router.get('/list', verificarToken, getUsuario);
 
 // Obtener usuario por ID
-router.get('/user', verificarToken, getUsuariosId);
+router.get('/distritos', verificarToken, getUsuariosId);
 
-router.get('/user/:id', verificarToken, getUsuarioDatosId);
+router.post('/CreateGrupo', verificarToken, postRol);
 
-// Editar usuario por ID
-router.put('/user/edit/:id', verificarToken, editUsuarioId);
+router.post('/CreateMetodo', verificarToken, posMetodo);
 
-// Eliminar usuario por ID
-router.delete('/user/delete/:id', verificarToken, deleteUsuario);
+router.post('/CreateTelefono/:id',verificarToken,postTelefono)
 
-// Ruta para login
-router.post('/login', loginUsuario);
-
-router.get('/usuarios/:id', verificarToken, getUsuarioById)
-
-router.post('/roles', verificarToken, postRol);;
-
-router.put('/CambioRol/:id', verificarToken, getAfiliadosPorUsuarioId);
+router.post('/CreateFechaPago/:id',verificarToken,postFechaPago)
 
 router.post('/Usuario/:id/uploadProfileImage', verificarToken, upload.single('image'), FotoPerfil);
-
-router.get('/afiliadores-afiliados', verificarToken, GetAfiliadorAfiliadores);
 
 router.get('/notificaciones/:usuarioId',Notificaciones)
 
 router.post('/CreateNotificaciones', CreateMensagge)
 
-router.post('/UserCode', crearUsuarioCode)
 router.post('/refresh-token',refreshToken)
 router.get("/me",verificarToken,me)
 router.post("/logout",verificarToken,logoutUsuario)

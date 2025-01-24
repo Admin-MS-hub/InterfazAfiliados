@@ -4,15 +4,8 @@ import morgan from 'morgan';
 import path, { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import usuarios from './routes/routes.js';
-import datosPersonales from './routes/RoutesDP.js';
-import VAdministradorGen from './routes/routesAG.js';
-import Locales from './routes/routerLocales.js';
-import SubAdmin from './routes/routedSubAdmin.js';
 import cors from 'cors';
-import compression from 'compression'; // Importa compression
 import cookieParser from 'cookie-parser';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 
@@ -50,12 +43,7 @@ app.get('/', async (req, res) => {
     res.status(200).json({ message: 'hello world' });
 });
 
-app.use(
-    usuarios);
-app.use(datosPersonales);
-app.use(VAdministradorGen);
-app.use(Locales);
-app.use(SubAdmin);
+app.use(usuarios);
 
 // Estática
 app.use(express.static(join(__dirname, 'public')));
