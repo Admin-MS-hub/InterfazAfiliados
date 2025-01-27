@@ -13,7 +13,7 @@ const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 const corsOptions = {
-    origin: ['https://darkgrey-ostrich-727682.hostingersite.com', 'http://localhost:3000','https://dniruc.apisperu.com'], // Orígenes permitidos
+    origin: ['https://massalud.org.pe', 'http://localhost:3000','https://dniruc.apisperu.com'], // Orígenes permitidos
     methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
     credentials: true, // Permite enviar cookies y encabezados de autorización
 };
